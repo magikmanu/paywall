@@ -1,0 +1,236 @@
+AddDefaultCharset "utf-8"
+DefaultLanguage "fr"
+
+AddOutputFilterByType DEFLATE text/html text/xml application/xhtml+xml text/plain application/javascript text/css
+
+##  suppression de SESSID dans les url  
+SetEnv SESSION_USE_TRANS_SID 0  
+##  serveur en PHP5  
+SetEnv PHP_VER 5  
+##  Commenter la ligne ci-dessous si plantage  
+# php_flag zlib.output_compression on  
+##  Activer le filtre  
+SetOutputFilter DEFLATE  
+##  Certains navigateurs ne peuvent pas avoir GZIP (les vieux)  
+BrowserMatch ^Mozilla/4 gzip-only-text/html  
+BrowserMatch ^Mozilla/4\.0678 no-gzip  
+##  On ne prend pas IE  
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html  
+##  On ne compresse pas les images, elles le sont déjà  
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary  
+##  on gère le cas des proxy  
+Header append Vary User-Agent env=!dont-var
+
+## contrôle du cache navigateur - Expire headers  
+<IfModule mod_expires.c>  
+    ExpiresActive On  
+    ExpiresDefault "access plus 7200 seconds"  
+    ExpiresByType image/jpg             "access plus 1 month"  
+    ExpiresByType image/jpeg            "access plus 1 month"  
+    ExpiresByType image/png             "access plus 1 month"  
+    ExpiresByType image/gif             "access plus 1 month"  
+    AddType image/x-icon .ico  
+    ExpiresByType image/ico             "access plus 1 month"  
+    ExpiresByType image/icon            "access plus 1 week"  
+    ExpiresByType image/x-icon          "access plus 1 week"  
+    ExpiresByType text/css              "access plus 1 week"  
+    ExpiresByType text/javascript       "access plus 1 week"  
+    ExpiresByType text/html             "access plus 7200 seconds"  
+    ExpiresByType application/xhtml+xml     "access plus 7200 seconds"  
+    ExpiresByType application/javascript    "access plus 1 month"  
+    ExpiresByType application/x-javascript  "access plus 1 month"  
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"  
+</IfModule> 
+
+###################################################
+#Personnalisation des erreurs serveurs
+###################################################
+ErrorDocument 401 http://www.cssdebutant.com/common/error/401.php
+ErrorDocument 403 http://www.cssdebutant.com/common/error/403.php
+ErrorDocument 404 http://www.cssdebutant.com/common/error/404.php
+ErrorDocument 410 http://www.cssdebutant.com/common/error/410.php
+ErrorDocument 500 http://www.cssdebutant.com/common/error/500.php
+
+Options -Indexes
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^cssdebutant.com$
+RewriteRule ^(.*) http://www.cssdebutant.com/$1 [QSA,L,R=301]
+
+###################################################
+#old pages
+###################################################
+Redirect permanent /generer_coins_arrondis_css.html  http://www.cssdebutant.com/generer-coins-arrondis-css.html
+Redirect permanent /creer_coins_arrondis_css.html  http://www.cssdebutant.com/creer-coins-arrondis-css.html
+Redirect permanent /generer-coins-arrondis-css.php  http://www.cssdebutant.com/creer-coins-arrondis-css.html
+Redirect permanent /bouton_en_css.html  http://www.cssdebutant.com/bouton-en-css.html
+Redirect permanent /formulaire_css.html  http://www.cssdebutant.com/
+Redirect permanent /formulaire-css.html  http://www.cssdebutant.com/
+Redirect permanent /generateur-de-css.html  http://www.cssdebutant.com/
+Redirect permanent /index_v2.php  http://www.cssdebutant.com/
+Redirect permanent /referencement-css.php http://www.cssdebutant.com/
+Redirect permanent /referencement-css.html http://www.cssdebutant.com/
+Redirect permanent /ne-pas-souligner-les-liens-en-css.html http://www.cssdebutant.com/
+Redirect permanent /ecouter-musique.html http://www.cssdebutant.com/
+Redirect permanent /les-textes-en-css.php  http://www.cssdebutant.com/les-textes-en-css.html
+
+###################################################
+#redirection V1 vers V2
+###################################################
+Redirect permanent /css-ou-html.html  								http://www.cssdebutant.com/debuter-en-css-choisir-css-ou-html.html
+Redirect permanent /syntaxe-css-heritage.html  						http://www.cssdebutant.com/debuter-en-css-comprendre-notion-heritage-en-css.html
+Redirect permanent /feuille-de-style-css.html  						http://www.cssdebutant.com/debuter-en-css-ou-mettre-le-code-css.html
+Redirect permanent /les-classes-css.html 			 				http://www.cssdebutant.com/debuter-en-css-les-classes.html
+Redirect permanent /les-id-css.html  								http://www.cssdebutant.com/debuter-en-css-les-id.html
+Redirect permanent /les-balises-div-et-span-en-css.html  			http://www.cssdebutant.com/debuter-en-css-les-balises-div-et-span.html
+Redirect permanent /cours-css.html 			 						http://www.cssdebutant.com/debuter-en-css-points-forts-du-css.html
+Redirect permanent /les-marges-margins-css.html						http://www.cssdebutant.com/coder-en-css-les-marges-margins.html
+Redirect permanent /les-padding-en-css.html							http://www.cssdebutant.com/coder-en-css-les-padding-en-css.html
+Redirect permanent /les-texte-en-css.html							http://www.cssdebutant.com/coder-en-css-couleur-espace-alignement-texte.html
+Redirect permanent /les-texte-en-css2.html							http://www.cssdebutant.com/coder-en-css-capital-minuscule-espacement-texte.html
+
+Redirect permanent /police-font-css.html							http://www.cssdebutant.com/coder-en-css-police-taille-gras-oblique-italique.html
+Redirect permanent /anchors-lien-pseudo-classes.html				http://www.cssdebutant.com/coder-en-css-anchors-lien-pseudo-classes.html
+Redirect permanent /fond-background.html 							http://www.cssdebutant.com/coder-en-css-fond-background.html
+Redirect permanent /border-color-style-width.html					http://www.cssdebutant.com/coder-en-css-border-color-style-width.html
+Redirect permanent /list-style-image-et-list-style-position.html	http://www.cssdebutant.com/coder-en-css-list-style-image-et-list-style-position.html
+Redirect permanent /largeur-et-hauteur.html							http://www.cssdebutant.com/coder-en-css-largeur-et-hauteur.html
+Redirect permanent /classification.html								http://www.cssdebutant.com/coder-en-css-curseur-flottement-tronquer.html
+Redirect permanent /positionnement.html								http://www.cssdebutant.com/coder-en-css-positionnement-html.html
+Redirect permanent /pseudo-elements.html 							http://www.cssdebutant.com/coder-en-css-pseudo-elements.html
+
+Redirect permanent /structure-une-page-css.html						http://www.cssdebutant.com/tutoriel-structure-une-page-css.html
+Redirect permanent /bouton-en-css.html								http://www.cssdebutant.com/tutoriel-bouton-en-css.html
+Redirect permanent /creer-coins-arrondis-css.html					http://www.cssdebutant.com/tutoriel-creer-coins-arrondis-css.html
+Redirect permanent /generer-coins-arrondis-css.html					http://www.cssdebutant.com/tutoriel-generer-coins-arrondis-css.html
+
+Redirect permanent /contacter-nous.html								http://www.cssdebutant.com/utile-contacter-nous.html
+Redirect permanent /faireUnLien.html								http://www.cssdebutant.com/utile-faire-lien-vers-cssdebutant.html
+Redirect permanent /liens-utiles.html								http://www.cssdebutant.com/utile-liens-utiles.html
+Redirect permanent /forum-css.html									http://www.cssdebutant.com/utile-forum-css.html
+
+#redirection petite page exemple
+Redirect permanent /pages/exemple/border-color.htm				    http://www.cssdebutant.com/pages/exemple/border-color.php
+Redirect permanent /pages/exemple/zindex.htm						http://www.cssdebutant.com/pages/exemple/zindex.php
+Redirect permanent /pages/exemple/visibiliy.htm						http://www.cssdebutant.com/pages/exemple/visibiliy.php
+Redirect permanent /pages/exemple/list-style-type.htm				http://www.cssdebutant.com/pages/exemple/list-style-type.php
+Redirect permanent /pages/exemple/list-style-position.htm			http://www.cssdebutant.com/pages/exemple/list-style-position.php
+Redirect permanent /pages/exemple/gestiondesliens.htm				http://www.cssdebutant.com/pages/exemple/gestiondesliens.php
+Redirect permanent /pages/exemple/float.htm					    	http://www.cssdebutant.com/pages/exemple/float.php
+Redirect permanent /pages/exemple/display.htm				    	http://www.cssdebutant.com/pages/exemple/display.php
+Redirect permanent /pages/exemple/cursor.htm				    	http://www.cssdebutant.com/pages/exemple/cursor.php
+Redirect permanent /pages/exemple/clear.htm						    http://www.cssdebutant.com/pages/exemple/clear.php
+Redirect permanent /pages/exemple/border-width.htm				    http://www.cssdebutant.com/pages/exemple/border-width.php
+Redirect permanent /pages/exemple/border-style.htm				    http://www.cssdebutant.com/pages/exemple/border-style.php
+Redirect permanent /pages/exemple/border-color.php					http://www.cssdebutant.com/pages/exemple/border-color.php
+Redirect permanent /pages/exemple/background-position.htm		    http://www.cssdebutant.com/pages/exemple/background-position.php
+Redirect permanent /pages/exemple/background-color.htm				http://www.cssdebutant.com/pages/exemple/background-color.php
+Redirect permanent /pages/exemple/background-attachment.htm		    http://www.cssdebutant.com/pages/exemple/background-attachment.php
+
+#redirection .php vers .html
+Redirect permanent /css-ou-html.php  								http://www.cssdebutant.com/debuter-en-css-choisir-css-ou-html.html
+Redirect permanent /syntaxe-css-heritage.php  						http://www.cssdebutant.com/debuter-en-css-comprendre-notion-heritage-en-css.html
+Redirect permanent /feuille-de-style-css.php  						http://www.cssdebutant.com/debuter-en-css-ou-mettre-le-code-css.html
+Redirect permanent /les-classes-css.php 			 				http://www.cssdebutant.com/debuter-en-css-les-classes.html
+Redirect permanent /les-id-css.php  								http://www.cssdebutant.com/debuter-en-css-les-id.html
+Redirect permanent /les-balises-div-et-span-en-css.php  			http://www.cssdebutant.com/debuter-en-css-les-balises-div-et-span.html
+Redirect permanent /cours-css.php 			 						http://www.cssdebutant.com/debuter-en-css-points-forts-du-css.html
+Redirect permanent /les-marges-margins-css.php						http://www.cssdebutant.com/coder-en-css-les-marges-margins.html
+Redirect permanent /les-padding-en-css.php							http://www.cssdebutant.com/coder-en-css-les-padding-en-css.html
+Redirect permanent /les-texte-en-css.php							http://www.cssdebutant.com/coder-en-css-couleur-espace-alignement-texte.html
+Redirect permanent /les-texte-en-css2.php							http://www.cssdebutant.com/coder-en-css-capital-minuscule-espacement-texte.html
+
+Redirect permanent /police-font-css.php								http://www.cssdebutant.com/coder-en-css-police-taille-gras-oblique-italique.html
+Redirect permanent /anchors-lien-pseudo-classes.php					http://www.cssdebutant.com/coder-en-css-anchors-lien-pseudo-classes.html
+Redirect permanent /fond-background.php 							http://www.cssdebutant.com/coder-en-css-fond-background.html
+Redirect permanent /border-color-style-width.php					http://www.cssdebutant.com/coder-en-css-border-color-style-width.html
+Redirect permanent /list-style-image-et-list-style-position.php		http://www.cssdebutant.com/coder-en-css-list-style-image-et-list-style-position.html
+Redirect permanent /largeur-et-hauteur.php							http://www.cssdebutant.com/coder-en-css-largeur-et-hauteur.html
+Redirect permanent /classification.php								http://www.cssdebutant.com/coder-en-css-curseur-flottement-tronquer.html
+Redirect permanent /positionnement.php								http://www.cssdebutant.com/coder-en-css-positionnement-html.html
+Redirect permanent /pseudo-elements.php 							http://www.cssdebutant.com/coder-en-css-pseudo-elements.html
+
+Redirect permanent /structure-une-page-css.php						http://www.cssdebutant.com/tutoriel-structure-une-page-css.html
+Redirect permanent /bouton-en-css.php								http://www.cssdebutant.com/tutoriel-bouton-en-css.html
+Redirect permanent /creer-coins-arrondis-css.php					http://www.cssdebutant.com/tutoriel-creer-coins-arrondis-css.html
+Redirect permanent /generer-coins-arrondis-css.php					http://www.cssdebutant.com/tutoriel-generer-coins-arrondis-css.html
+
+Redirect permanent /contacter-nous.php								http://www.cssdebutant.com/utile-contacter-nous.html
+Redirect permanent /faireUnLien.php									http://www.cssdebutant.com/utile-faire-lien-vers-cssdebutant.html
+Redirect permanent /liens-utiles.php								http://www.cssdebutant.com/utile-liens-utiles.html
+Redirect permanent /forum-css.php									http://www.cssdebutant.com/utile-forum-css.html
+
+###################################################
+#réecriture V2
+###################################################
+RewriteRule ^debuter-en-css-choisir-css-ou-html.html$					pages/debuter_en_CSS/css-ou-html.php [L]
+RewriteRule ^debuter-en-css-comprendre-notion-heritage-en-css.html$		pages/debuter_en_CSS/syntaxe-css-heritage.php [L]
+RewriteRule ^debuter-en-css-ou-mettre-le-code-css.html$					pages/debuter_en_CSS/feuille-de-style-css.php [L]
+RewriteRule ^debuter-en-css-les-classes.html$							pages/debuter_en_CSS/les-classes-css.php [L]
+RewriteRule ^debuter-en-css-les-id.html$								pages/debuter_en_CSS/les-id-css.php [L]
+RewriteRule ^debuter-en-css-les-balises-div-et-span.html$				pages/debuter_en_CSS/les-balises-div-et-span-en-css.php [L]
+RewriteRule ^debuter-en-css-points-forts-du-css.html$					pages/debuter_en_CSS/cours-css.php [L]
+
+RewriteRule ^coder-en-css-les-marges-margins.html$						pages/comprendre_et_coder_en_css/les-marges-margins-css.php [L]
+RewriteRule ^coder-en-css-les-padding-en-css.html$						pages/comprendre_et_coder_en_css/les-padding-en-css.php [L]
+RewriteRule ^coder-en-css-couleur-espace-alignement-texte.html$			pages/comprendre_et_coder_en_css/les-textes-en-css.php [L]
+RewriteRule ^coder-en-css-capital-minuscule-espacement-texte.html$		pages/comprendre_et_coder_en_css/les-textes-en-css2.php [L]
+RewriteRule ^coder-en-css-police-taille-gras-oblique-italique.html$		pages/comprendre_et_coder_en_css/police-font-css.php [L]
+RewriteRule ^coder-en-css-anchors-lien-pseudo-classes.html$				pages/comprendre_et_coder_en_css/anchors-lien-pseudo-classes.php [L]
+RewriteRule ^coder-en-css-fond-background.html$							pages/comprendre_et_coder_en_css/fond-background.php [L]
+RewriteRule ^coder-en-css-border-color-style-width.html$				pages/comprendre_et_coder_en_css/border-color-style-width.php [L]
+RewriteRule ^coder-en-css-list-style-image-et-list-style-position.html$	pages/comprendre_et_coder_en_css/list-style-image-et-list-style-position.php [L]
+RewriteRule ^coder-en-css-largeur-et-hauteur.html$						pages/comprendre_et_coder_en_css/largeur-et-hauteur.php [L]
+RewriteRule ^coder-en-css-curseur-flottement-tronquer.html$				pages/comprendre_et_coder_en_css/classification.php [L]
+RewriteRule ^coder-en-css-positionnement-html.html$						pages/comprendre_et_coder_en_css/positionnement.php [L]
+RewriteRule ^coder-en-css-pseudo-elements.html$							pages/comprendre_et_coder_en_css/pseudo-elements.php [L]
+
+RewriteRule ^tutoriel-structure-une-page-css.html$						pages/contact_partenariats_liens/structure-une-page-css.php [L]
+RewriteRule ^tutoriel-bouton-en-css.html$								pages/contact_partenariats_liens/bouton-en-css.php [L]
+RewriteRule ^tutoriel-creer-coins-arrondis-css.html$					pages/contact_partenariats_liens/creer-coins-arrondis-css.php [L]
+RewriteRule ^tutoriel-generer-coins-arrondis-css.html$					pages/contact_partenariats_liens/creer-coins-arrondis-css.php [L]
+
+RewriteRule ^utile-contacter-nous.html$									pages/contact_partenariats_liens/contacter-nous.php [L]
+RewriteRule ^utile-faire-lien-vers-cssdebutant.html$					pages/contact_partenariats_liens/faireUnLien.php [L]
+RewriteRule ^utile-liens-utiles.html$									pages/contact_partenariats_liens/liens-utiles.php [L]
+RewriteRule ^utile-forum-css.html$										pages/contact_partenariats_liens/forum-css.php [L]
+
+###################################################
+#réecriture V1
+#RewriteRule ^css-ou-html.html$							pages/debuter_en_CSS/css-ou-html.php [L]
+#RewriteRule ^syntaxe-css-heritage.html$					pages/debuter_en_CSS/syntaxe-css-heritage.php [L]
+#RewriteRule ^feuille-de-style-css.html$					pages/debuter_en_CSS/feuille-de-style-css.php [L]
+#RewriteRule ^les-classes-css.html$						pages/debuter_en_CSS/les-classes-css.php [L]
+#RewriteRule ^les-id-css.html$							pages/debuter_en_CSS/les-id-css.php [L]
+#RewriteRule ^les-balises-div-et-span-en-css.html$		pages/debuter_en_CSS/les-balises-div-et-span-en-css.php [L]
+#RewriteRule ^cours-css.html$							pages/debuter_en_CSS/cours-css.php [L]
+
+#RewriteRule ^les-marges-margins-css.html$				pages/comprendre_et_coder_en_css/les-marges-margins-css.php [L]
+#RewriteRule ^les-padding-en-css.html$					pages/comprendre_et_coder_en_css/les-padding-en-css.php [L]
+#RewriteRule ^les-texte-en-css.html$						pages/comprendre_et_coder_en_css/les-textes-en-css.php [L]
+#RewriteRule ^les-texte-en-css2.html$					pages/comprendre_et_coder_en_css/les-textes-en-css2.php [L]
+#RewriteRule ^police-font-css.html$						pages/comprendre_et_coder_en_css/police-font-css.php [L]
+#RewriteRule ^anchors-lien-pseudo-classes.html$			pages/comprendre_et_coder_en_css/anchors-lien-pseudo-classes.php [L]
+#RewriteRule ^fond-background.html$						pages/comprendre_et_coder_en_css/fond-background.php [L]
+#RewriteRule ^border-color-style-width.html$				pages/comprendre_et_coder_en_css/border-color-style-width.php [L]
+#RewriteRule ^list-style-image-et-list-style-position.html$	pages/comprendre_et_coder_en_css/list-style-image-et-list-style-position.php [L]
+#RewriteRule ^largeur-et-hauteur.html$					pages/comprendre_et_coder_en_css/largeur-et-hauteur.php [L]
+#RewriteRule ^classification.html$						pages/comprendre_et_coder_en_css/classification.php [L]
+#RewriteRule ^positionnement.html$						pages/comprendre_et_coder_en_css/positionnement.php [L]
+#RewriteRule ^pseudo-elements.html$						pages/comprendre_et_coder_en_css/pseudo-elements.php [L]
+
+#RewriteRule ^referencement-css.html$					pages/contact_partenariats_liens/referencement-css.php [L]
+#RewriteRule ^structure-une-page-css.html$				pages/contact_partenariats_liens/structure-une-page-css.php [L]
+#RewriteRule ^bouton-en-css.html$						pages/contact_partenariats_liens/bouton-en-css.php [L]
+#RewriteRule ^creer-coins-arrondis-css.html$				pages/contact_partenariats_liens/creer-coins-arrondis-css.php [L]
+#RewriteRule ^generer-coins-arrondis-css.html$			pages/contact_partenariats_liens/generer-coins-arrondis-css.php [L]
+
+#RewriteRule ^ne-pas-souligner-les-liens-en-css.html$	pages/contact_partenariats_liens/ne-pas-souligner-les-liens-en-css.php [L]
+#RewriteRule ^formulaire-css.html$						pages/contact_partenariats_liens/formulaire-css.php [L]
+#RewriteRule ^generateur-de-css.html$					pages/contact_partenariats_liens/generateur-de-css.php [L]
+
+#RewriteRule ^contacter-nous.html$						pages/contact_partenariats_liens/contacter-nous.php [L]
+#RewriteRule ^faireUnLien.html$							pages/contact_partenariats_liens/faireUnLien.php [L]
+#RewriteRule ^liens-utiles.html$							pages/contact_partenariats_liens/liens-utiles.php [L]
+#RewriteRule ^forum-css.html$							pages/contact_partenariats_liens/forum-css.php [L]
